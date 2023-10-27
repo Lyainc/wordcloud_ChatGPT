@@ -11,10 +11,18 @@ def generate_korean_wordcloud(csv_file, output_png):
 
     # Initialize the Korean morpheme analyzer (in this case, Okt)
     analyzer = Okt()
+    
+    stop_words = ["은", "는", "이", "가", "을", "를", "으로", "에서", "에게", "에서", "부터"]
 
-    # Tokenize the text data and join the tokens into a single string
-    text = ' '.join([' '.join(analyzer.nouns(sentence)) for sentence in data['KoreanText']])
+    # Tokenize the text data, filter out stop words, and join the tokens into a single string
+    tokens = []
+    for sentence in data['KoreanText']:
+        for token, pos in analyzer.pos(sentence):
+            if token not in stop_words:
+                tokens.append(token)
 
+    text = ' '.join(tokens)
+    
     # Specify the local font path for Nanum Gothic
     font_path = 'data/NanumSquareR.ttf'  # Replace with the actual path to the TTF font file
 
