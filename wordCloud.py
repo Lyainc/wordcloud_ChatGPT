@@ -5,9 +5,10 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from datetime import datetime
 from PIL import Image
+from collections import Counter
 
 # Define a list of custom Korean stopwords
-custom_stopwords = ["것", "하는", "되는", "때", "있는", "대한", "할", "더", "일", "등", "대해", "없이", "수", "및", "하여"]
+custom_stopwords = ["것", "하는", "되는", "때", "있는", "대한", "할", "더", "일", "등", "대해", "없이", "수", "및", "하여", "점", "내", "조직", "개선", "모습", "위해", "많은", "진행", "환경", "많이", "부분", "가지"]
 
 # Define a list of meaningless morphemes (POS tags to exclude)
 meaningless_pos = ["Josa", "Punctuation", "Eomi", "Suffix", "Conjunction"]
@@ -50,7 +51,6 @@ def generate_korean_wordcloud(csv_file, output_directory, mask_image_path):
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
     plt.show()
-
 
     # Generate a timestamp for the output file name
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
